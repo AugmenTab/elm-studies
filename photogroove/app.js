@@ -5227,9 +5227,9 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Main$Small = {$: 'Small'};
+var $author$project$Main$Medium = {$: 'Medium'};
 var $author$project$Main$initialModel = {
-	chosenSize: $author$project$Main$Small,
+	chosenSize: $author$project$Main$Medium,
 	photos: _List_fromArray(
 		[
 			{url: '1.jpeg'},
@@ -5521,7 +5521,7 @@ var $author$project$Main$update = F2(
 	});
 var $author$project$Main$ClickedSurpriseMe = {$: 'ClickedSurpriseMe'};
 var $author$project$Main$Large = {$: 'Large'};
-var $author$project$Main$Medium = {$: 'Medium'};
+var $author$project$Main$Small = {$: 'Small'};
 var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
@@ -5576,30 +5576,42 @@ var $author$project$Main$urlPrefix = 'https://elm-in-action.com/';
 var $author$project$Main$ClickedSize = function (a) {
 	return {$: 'ClickedSize', a: a};
 };
+var $elm$json$Json$Encode$bool = _Json_wrap;
+var $elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$bool(bool));
+	});
+var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('checked');
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$html$Html$Attributes$name = $elm$html$Html$Attributes$stringProperty('name');
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
-var $author$project$Main$viewSizeChooser = function (size) {
-	return A2(
-		$elm$html$Html$label,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$input,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$type_('radio'),
-						$elm$html$Html$Attributes$name('size'),
-						$elm$html$Html$Events$onClick(
-						$author$project$Main$ClickedSize(size))
-					]),
-				_List_Nil),
-				$elm$html$Html$text(
-				$author$project$Main$sizeToString(size))
-			]));
-};
+var $author$project$Main$viewSizeChooser = F2(
+	function (chosenSize, size) {
+		return A2(
+			$elm$html$Html$label,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$input,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$type_('radio'),
+							$elm$html$Html$Attributes$name('size'),
+							$elm$html$Html$Attributes$checked(
+							_Utils_eq(size, chosenSize)),
+							$elm$html$Html$Events$onClick(
+							$author$project$Main$ClickedSize(size))
+						]),
+					_List_Nil),
+					$elm$html$Html$text(
+					$author$project$Main$sizeToString(size))
+				]));
+	});
 var $author$project$Main$ClickedPhoto = function (a) {
 	return {$: 'ClickedPhoto', a: a};
 };
@@ -5689,7 +5701,7 @@ var $author$project$Main$view = function (model) {
 					]),
 				A2(
 					$elm$core$List$map,
-					$author$project$Main$viewSizeChooser,
+					$author$project$Main$viewSizeChooser(model.chosenSize),
 					_List_fromArray(
 						[$author$project$Main$Small, $author$project$Main$Medium, $author$project$Main$Large]))),
 				A2(

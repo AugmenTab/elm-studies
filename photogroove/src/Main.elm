@@ -35,7 +35,7 @@ initialModel =
         , { url = "3.jpeg" }
         ]
     , selectedUrl = "1.jpeg"
-    , chosenSize = Small
+    , chosenSize = Medium
     }
 
 
@@ -107,7 +107,7 @@ view model =
             [ text "Surprise Me!" ]
         , h3 [] [ text "Thumbnail Size" ]
         , div [ id "choose-size" ] 
-            (List.map viewSizeChooser [ Small, Medium, Large ])
+            (List.map (viewSizeChooser model.chosenSize) [ Small, Medium, Large ])
         , div [ id "thumbnails", class (sizeToString model.chosenSize) ] 
             (List.map (viewThumbnail model.selectedUrl) model.photos)
         , img 
@@ -128,10 +128,10 @@ viewThumbnail selectedUrl thumb =
         []
 
 
-viewSizeChooser : ThumbnailSize -> Html Msg
-viewSizeChooser size =
+viewSizeChooser : ThumbnailSize -> ThumbnailSize -> Html Msg
+viewSizeChooser chosenSize size =
     label []
-        [ input [ type_ "radio", name "size", onClick (ClickedSize size) ] []
+        [ input [ type_ "radio", name "size", checked (size == chosenSize) ,onClick (ClickedSize size) ] []
         , text (sizeToString size)
         ]
 
@@ -147,9 +147,3 @@ sizeToString size =
 
         Large ->
             "large"
-
-
-{- TODO:
-    - Have thumbnail sizes update when radio buttons change, rather than just on click.
-    - Display medium thumbnails and radio button by default on page load.
--}

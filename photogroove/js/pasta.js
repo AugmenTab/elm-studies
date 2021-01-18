@@ -1,4 +1,4 @@
-var app = Elm.Main.init({
+var app = Elm.PhotoGroove.init({
     node: document.getElementById("app"),
     flags: Pasta.version
 });

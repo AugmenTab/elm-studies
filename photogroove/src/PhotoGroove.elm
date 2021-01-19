@@ -1,7 +1,7 @@
 port module PhotoGroove exposing (Model, Msg(..), Photo, Status(..),
     initialModel, main, photoDecoder, update, urlPrefix, view)
 
-import Browser exposing (sandbox)
+import Browser exposing (..)
 import Html exposing (Html, 
     button, canvas, div, h1, h3, img, input, label, node, select, text)
 import Html.Attributes as Attr exposing (

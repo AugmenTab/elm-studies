@@ -1,4 +1,9 @@
-port module PhotoGallery exposing (Model, Msg, init, subscriptions,  update, view)
+-- FOR TEST ONLY --
+-- port module PhotoGallery exposing (Model, Msg(..), Photo, Status(..),
+--     initialModel, main, photoDecoder, update, urlPrefix, view)
+
+port module PhotoGallery exposing (
+    Model, Msg, init, subscriptions,  update, view)
 
 import Browser exposing (..)
 import Html exposing (Html, 
